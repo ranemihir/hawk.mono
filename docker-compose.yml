@@ -79,6 +79,19 @@ services:
     volumes:
       - ./cron-manager:/usr/src/app
 
+  javascript:
+    build:
+      dockerfile: "Dockerfile"
+      context: ./workers
+      args:
+        -WORKER_NAME: hawk-worker-javascript
+    volumes:
+      - ./workers/.env:/app/.env
+    depends_on:
+      - mongodb
+      - rabbitmq
+
+
 
 volumes:
   mongodata:
